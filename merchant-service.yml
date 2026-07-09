@@ -1,6 +1,6 @@
 spring:
   application:
-    name: merchant-service
+    name: merchant-onboarding
 
   datasource:
     url: jdbc:mysql://localhost:3307/merchant_db
@@ -12,6 +12,20 @@ spring:
       ddl-auto: update
     show-sql: true
 
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: merchant-group
+      auto-offset-reset: earliest
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
 server:
   port: 8081
 
@@ -19,3 +33,14 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      documentService:
+        failure-rate-threshold: 50
+        minimum-number-of-calls: 5
+        sliding-window-size: 10
+        wait-duration-in-open-state: 10s
