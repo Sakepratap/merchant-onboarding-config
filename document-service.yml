@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: document-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/document_db
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 8084
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
