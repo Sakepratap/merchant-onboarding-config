@@ -3,7 +3,7 @@ spring:
     name: document-service
 
   datasource:
-    url: jdbc:mysql://localhost:3307/document_db
+    url: jdbc:mysql://merchant-mysql:3306/document_db
     username: root
     password: root
 
