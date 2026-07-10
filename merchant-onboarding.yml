@@ -3,7 +3,7 @@ spring:
     name: merchant-onboarding
 
   datasource:
-    url: jdbc:mysql://localhost:3307/merchant_db
+    url: jdbc:mysql://merchant-mysql:3306/merchant_db
     username: root
     password: root
 
@@ -13,7 +13,7 @@ spring:
     show-sql: true
 
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: merchant-kafka:9092
     consumer:
       group-id: merchant-group
       auto-offset-reset: earliest
